@@ -6,15 +6,32 @@ namespace CheckoutKata
     public class Checkout : ICheckout
     {
         public List<Item> scannedItems {  get; set; }
+        public List<Product> products {  get; set; }
+        public List<SpecialOffer> specialOffers { get; set; }
 
-        public Checkout()
+        public Checkout(List<Product> listProducts, List<SpecialOffer> listOffers)
         {
             scannedItems = new List<Item>();
+
+            products = listProducts;
+            specialOffers = listOffers;
         }
 
         public int GetTotalPrice()
         {
-            throw new System.NotImplementedException();
+            int totalPrice = 0;
+
+            foreach (Item item in scannedItems)
+            {
+                var specialOffer = specialOffers.FirstOrDefault(s => s.Sku == item.Sku);
+                if (specialOffer != null)
+                {
+                    totalPrice += (item.Amount / specialOffer.Amount) * specialOffer.Price;
+                }
+
+            }
+
+            return totalPrice;
         }
 
         public void Scan(string item)

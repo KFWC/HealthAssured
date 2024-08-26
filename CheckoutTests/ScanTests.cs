@@ -1,6 +1,7 @@
 ﻿
 using CheckoutKata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CheckoutTests
@@ -13,7 +14,7 @@ namespace CheckoutTests
         [TestInitialize]
         public void Setup()
         {
-            checkout = new Checkout();
+            checkout = new Checkout(new List<Product> { new Product { Sku = "A", Price = 50 }, new Product { Sku = "B", Price = 30 }, new Product { Sku = "C", Price = 20 }, new Product { Sku = "D", Price = 15 } }, null);
         }
 
         [TestMethod]
