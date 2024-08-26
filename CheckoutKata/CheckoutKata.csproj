@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="Checkout.cs" />
     <Compile Include="ICheckout.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\CheckoutKata.rd.xml" />
   </ItemGroup>
