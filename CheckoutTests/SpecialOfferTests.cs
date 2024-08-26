@@ -77,18 +77,5 @@ namespace CheckoutTests
 
             Assert.IsTrue(price == 90);
         }
-
-        [TestMethod]
-        public void ScanItemsWithoutSpecialOffers_ShouldReturnZero()
-        {
-            checkout.Scan("C");
-            checkout.Scan("C");
-            checkout.Scan("C");
-            checkout.Scan("C");
-
-            var price = checkout.GetTotalPrice();
-
-            Assert.IsTrue(price == 0);
-        }
     }
 }

@@ -24,11 +24,17 @@ namespace CheckoutKata
             foreach (Item item in scannedItems)
             {
                 var specialOffer = specialOffers.FirstOrDefault(s => s.Sku == item.Sku);
+                var product = products.FirstOrDefault(s => s.Sku == item.Sku);
+
                 if (specialOffer != null)
                 {
                     totalPrice += (item.Amount / specialOffer.Amount) * specialOffer.Price;
+                    totalPrice += (item.Amount % specialOffer.Amount) * product.Price;
                 }
-
+                else
+                {
+                    totalPrice += (item.Amount * product.Price);
+                }
             }
 
             return totalPrice;
@@ -38,15 +44,18 @@ namespace CheckoutKata
         {
             if (!string.IsNullOrEmpty(item))
             {
-                var scannedItem = scannedItems.FirstOrDefault(s => s.Sku == item);
-
-                if (scannedItem != null)
+                var product = products.FirstOrDefault(s => s.Sku == item);
+                if (product != null)
                 {
-                    scannedItem.Amount++;
-                }
-                else
-                {
-                    scannedItems.Add(new Item { Sku = item, Amount = 1});
+                    var scannedItem = scannedItems.FirstOrDefault(s => s.Sku == item);
+                    if (scannedItem != null)
+                    {
+                        scannedItem.Amount++;
+                    }
+                    else
+                    {
+                        scannedItems.Add(new Item { Sku = item, Amount = 1 });
+                    }
                 }
             }
         }

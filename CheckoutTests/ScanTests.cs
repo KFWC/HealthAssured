@@ -74,5 +74,15 @@ namespace CheckoutTests
             Assert.IsTrue(skuB != null);
             Assert.IsTrue(skuB.Amount == 1);
         }
+
+        [TestMethod]
+        public void ScanInvalidSkus_ShouldReturnLengthOfScannedItemsAsZero()
+        {
+            checkout.Scan("Z");
+            checkout.Scan("X");
+            checkout.Scan("Y");
+
+            Assert.IsTrue(checkout.scannedItems.Count == 0);
+        }
     }
 }
